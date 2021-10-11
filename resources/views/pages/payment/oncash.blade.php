@@ -50,7 +50,7 @@ $cart = Cart::Content();
                 <div class="row">
                     <div class="col-lg-7" style="border: 1px solid gray; padding: 20px; border-radius: 25px;">
                         <div class="contact_form_container">
-                            <div class="contact_form_title text-center">Cart Product</div>
+                            <div class="contact_form_title text-center">商品詳細</div>
 
 
 
@@ -65,13 +65,13 @@ $cart = Cart::Content();
                                         <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 
                                             <div class="cart_item_name cart_info_col">
-                                                <div class="cart_item_title"><b>Product Image</b></div>
+                                                <div class="cart_item_title"><b>商品画像</b></div>
                                                 <div class="cart_item_text"><img src="{{asset($row->options->image)}}" style="width: 70px; height: 70px;" alt=""></div>
                                             </div>
 
 
                                             <div class="cart_item_name cart_info_col">
-                                                <div class="cart_item_title"><b>Name</b></div>
+                                                <div class="cart_item_title"><b>商品</b></div>
                                                 <div class="cart_item_text">{{$row->name}}</div>
                                             </div>
                                             @if ($row->options->color == NULL)
@@ -94,7 +94,7 @@ $cart = Cart::Content();
                                             
     
                                             <div class="cart_item_quantity cart_info_col">
-                                                <div class="cart_item_title"><b>Quantity</b></div>
+                                                <div class="cart_item_title"><b>数量</b></div>
                                                 <div class="cart_item_text">{{$row->qty}}</div>
                                                 
                                                 
@@ -103,12 +103,12 @@ $cart = Cart::Content();
 
 
                                             <div class="cart_item_price cart_info_col">
-                                                <div class="cart_item_title"><b>Price</b></div>
-                                                <div class="cart_item_text">${{$row->price}}</div>
+                                                <div class="cart_item_title"><b>価格</b></div>
+                                                <div class="cart_item_text">￥{{$row->price}}</div>
                                             </div>
                                             <div class="cart_item_total cart_info_col">
-                                                <div class="cart_item_title"><b>Total</b></div>
-                                                <div class="cart_item_text">${{$row->price*$row->qty}}</div>
+                                                <div class="cart_item_title"><b>小計</b></div>
+                                                <div class="cart_item_text">￥{{$row->price*$row->qty}}</div>
                                             </div>
     
                                            
@@ -122,26 +122,26 @@ $cart = Cart::Content();
                             
                             <ul class="list-group col-lg-8" style="float: right;">
                                 @if (Session::has('coupon'))
-                                <li class="list-group-item">Subtotal:<span style="float: right;">${{ Session::get('coupon')['balance'] }}</span></li>
-                                <li class="list-group-item">Coupon: ({{ Session::get('coupon')['name'] }})
+                                <li class="list-group-item">小計:<span style="float: right;">￥{{ Session::get('coupon')['balance'] }}</span></li>
+                                <li class="list-group-item">クーポン: ({{ Session::get('coupon')['name'] }})
                                 <a href="{{ route('coupon.remove')}}" class="btn btn-danger btn-sm">x</a>							
                                 
                                 <span style="float: right;">${{ Session::get('coupon')['discount'] }}</span></li>
                                 
                                 @else
-                                <li class="list-group-item">Subtotal:<span style="float: right;">${{ Cart::subtotal()}}</span></li>	
+                                <li class="list-group-item">小計:<span style="float: right;">￥{{ Cart::subtotal()}}</span></li>	
                                 @endif
     
                             
                             
-                            <li class="list-group-item">Shiping Chage:<span style="float: right;">${{ $charge}}</span></li>
-                            <li class="list-group-item">Vat:<span style="float: right;">${{$vat}}</span></li>
+                            <li class="list-group-item">消費税:<span style="float: right;">￥{{ $charge}}</span></li>
+                            <li class="list-group-item">送料:<span style="float: right;">￥{{$vat}}</span></li>
                                 @if (Session::has('coupon'))
-                                <li class="list-group-item">Total:<span style="float: right;">${{Session::get('coupon')['balance'] + $charge + $vat}}</span></li>
+                                <li class="list-group-item">Total:<span style="float: right;">￥{{Session::get('coupon')['balance'] + $charge + $vat}}</span></li>
     
                                         
                                     @else
-                                    <li class="list-group-item">Total:<span style="float: right;">${{ Cart::subtotal() + $charge + $vat }}</span></li>	
+                                    <li class="list-group-item">Total:<span style="float: right;">￥{{ Cart::subtotal() + $charge + $vat }}</span></li>	
                                     @endif
     
                             
@@ -167,16 +167,20 @@ $cart = Cart::Content();
 
 
 
-
-                    <div class="col-lg-5" style="border: 1px solid gray; padding: 20px; border-radius: 25px;">
+                    
+                    <div class="col-lg-5 text-center py-5" style="border: 1px solid gray; padding: 20px; border-radius: 25px;">
                         <div class="contact_form_container">
-                            <div class="contact_form_title text-center">Shipping Address</div>
+                            <div class="contact_form_title text-center">お支払い方法</div>
 
                             <form action="{{ route('oncash.charge')}}" method="post" id="payment-form">
                                 @csrf
+                                <h5>銀行振込</h5>
+
+
+
                                 <div class="form-row">
                                   <label for="card-element">
-                                    Cash On Delivery
+                                    
                                   </label>
                                   <div id="card-element">
                                     <!-- A Stripe Element will be inserted here. -->
@@ -192,8 +196,10 @@ $cart = Cart::Content();
                                 <input type="hidden" name="ship_name" value="{{ $data['name'] }}">
                                 <input type="hidden" name="ship_phone" value="{{ $data['phone'] }}">
                                 <input type="hidden" name="ship_email" value="{{ $data['email'] }}">
+                                <input type="hidden" name="zipcode" value="{{ $data['zip'] }}">
                                 <input type="hidden" name="ship_address" value="{{ $data['address'] }}">
                                 <input type="hidden" name="ship_city" value="{{ $data['city'] }}">
+                                <input type="hidden" name="ship_building" value="{{ $data['building'] }}">
                                 <input type="hidden" name="payment_type" value="{{ $data['payment'] }}">
 
                                 
@@ -203,7 +209,7 @@ $cart = Cart::Content();
 
 
                               
-                                <button class="btn btn-info">Pay Now</button>
+                                <button class="btn btn-info">確定する</button>
                               </form>
     
                             

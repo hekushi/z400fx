@@ -20,7 +20,7 @@ $vat = $setting->vat;
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="cart_container">
-						<div class="cart_title">Checkout</div>
+						<div class="cart_title">ご注文確認画面</div>
 						<div class="cart_items">
 							<ul class="cart_list">
 
@@ -31,7 +31,7 @@ $vat = $setting->vat;
 									<div class="cart_item_image text-center"><br><img src="{{asset($row->options->image)}}" style="width: 70px; height: 70px;" alt=""></div>
 									<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 										<div class="cart_item_name cart_info_col">
-											<div class="cart_item_title">Name</div>
+											<div class="cart_item_title">商品名</div>
 											<div class="cart_item_text">{{$row->name}}</div>
 										</div>
                                         @if ($row->options->color == NULL)
@@ -54,7 +54,7 @@ $vat = $setting->vat;
                                         
 
 										<div class="cart_item_quantity cart_info_col">
-											<div class="cart_item_title">Quantity</div><br>
+											<div class="cart_item_title">数量</div><br>
                                             <form method="post" action="{{route('update.cartitem')}}">
                                                 @csrf
                                                 <input type="hidden" name="productid" value="{{$row->rowId}}">
@@ -71,16 +71,16 @@ $vat = $setting->vat;
 											
 										</div>
 										<div class="cart_item_price cart_info_col">
-											<div class="cart_item_title">Price</div>
-											<div class="cart_item_text">${{$row->price}}</div>
+											<div class="cart_item_title">価格</div>
+											<div class="cart_item_text">￥{{$row->price}}</div>
 										</div>
 										<div class="cart_item_total cart_info_col">
-											<div class="cart_item_title">Total</div>
-											<div class="cart_item_text">${{$row->price*$row->qty}}</div>
+											<div class="cart_item_title">小計</div>
+											<div class="cart_item_text">￥{{$row->price*$row->qty}}</div>
 										</div>
 
                                         <div class="cart_item_total cart_info_col">
-											<div class="cart_item_title">Action</div><br>
+											<div class="cart_item_title">取り消す</div><br>
 											<a href="{{ url('remove/cart/'.$row->rowId)}}" class="btn btn-sm btn-danger">x</a>
 										</div>
 
@@ -102,39 +102,39 @@ $vat = $setting->vat;
 
 
 
-                            <h5> Apply Coupon</h5>
+                            <h5>クーポンコード</h5>
                             <form method="post" action="{{ route('apply.coupon')}}">
 								@csrf
                             <div class="form group col-lg-4">
-                                <input type="text" name="coupon" class="form-control" required="" placeholder="Enter Your Coupon">
+                                <input type="text" name="coupon" class="form-control" required="" placeholder="">
                             </div><br>
-                            <button type="submit" class="btn btn-danger ml-2">Submit</button>
+                            <button type="submit" class="btn btn-danger ml-2">適用する</button>
 
                         </form>
 						@endif
                         </div>
                         <ul class="list-group col-lg-4" style="float: right;">
 							@if (Session::has('coupon'))
-							<li class="list-group-item">Subtotal:<span style="float: right;">${{ Session::get('coupon')['balance'] }}</span></li>
-							<li class="list-group-item">Coupon: ({{ Session::get('coupon')['name'] }})
+							<li class="list-group-item">小計:<span style="float: right;">￥{{ Session::get('coupon')['balance'] }}</span></li>
+							<li class="list-group-item">クーポン: ({{ Session::get('coupon')['name'] }})
 							<a href="{{ route('coupon.remove')}}" class="btn btn-danger btn-sm">x</a>							
 							
-							<span style="float: right;">${{ Session::get('coupon')['discount'] }}</span></li>
+							<span style="float: right;">￥{{ Session::get('coupon')['discount'] }}</span></li>
 							
 							@else
-							<li class="list-group-item">Subtotal:<span style="float: right;">${{ Cart::subtotal()}}</span></li>	
+							<li class="list-group-item">小計:<span style="float: right;">￥{{ Cart::subtotal()}}</span></li>	
 							@endif
 
                         
                         
-                        <li class="list-group-item">Shiping Chage:<span style="float: right;">${{ $charge}}</span></li>
-                        <li class="list-group-item">Vat:<span style="float: right;">${{$vat}}</span></li>
+                        <li class="list-group-item">消費税:<span style="float: right;">￥{{ $charge}}</span></li>
+                        <li class="list-group-item">送料:<span style="float: right;">￥{{$vat}}</span></li>
 							@if (Session::has('coupon'))
-							<li class="list-group-item">Total:<span style="float: right;">${{Session::get('coupon')['balance'] + $charge + $vat}}</span></li>
+							<li class="list-group-item">Total:<span style="float: right;">￥{{Session::get('coupon')['balance'] + $charge + $vat}}</span></li>
 
 									
 								@else
-								<li class="list-group-item">Total:<span style="float: right;">${{ Cart::subtotal() + $charge + $vat }}</span></li>	
+								<li class="list-group-item">合計:<span style="float: right;">￥{{ Cart::subtotal() + $charge + $vat }}</span></li>	
 								@endif
 
                         
@@ -144,26 +144,10 @@ $vat = $setting->vat;
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					
+			
 						<div class="cart_buttons">
-							<button type="button" class="button cart_button_clear">All Cancel</button>
-							<a href="{{ route('payment.step')}}" class="button cart_button_checkout">Final Step</a>
+							<button type="button" class="button cart_button_clear">キャンセル</button>
+							<a href="{{ route('payment.step')}}" class="button cart_button_checkout">決済へ進む</a>
 						</div>
 					</div>
 				</div>

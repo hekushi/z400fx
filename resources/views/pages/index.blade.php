@@ -3,7 +3,7 @@
 @section('content')
 
 @include('layouts.menubar')
-@include('layouts.slider')
+
 
 @php
 $featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(8)->get();
@@ -14,63 +14,271 @@ $hot = DB::table('products')
                 ->select('products.*','brands.brand_name')
                 ->where('products.status',1)->where('hot_deal',1)->orderBy('id','desc')->limit(3)->get();
 @endphp
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center bg-dark">
 
-    
-<div class="characteristics">
-    <div class="container">
-        <div class="row">
+      <h1 class="logo mr-auto pt-5"><a href="{{ url('/')}}">サイトNAME</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="{{ asset('public/frontend/images/char_1.png')}}" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
+      <nav class="nav-menu d-none d-lg-block">
+        
+      </nav><!-- .nav-menu -->
 
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="{{ asset('public/frontend/images/char_2.png')}}" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="{{ asset('public/frontend/images/char_3.png')}}" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="{{ asset('public/frontend/images/char_4.png')}}" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="cart_icon">
+        <a href="{{ route('show.cart') }}">
+          <img src="{{ asset('public/frontend/images/cart.png')}}" alt="">
+        <div class="cart_count"><span>{{ Cart::count() }}</span></div>
     </div>
+    <div class="cart_content">
+        <div class="cart_text">Cart</div>
+        <div class="cart_price">￥{{ Cart::subtotal() }}</div>
+    </div></a>
+    </div>
+  </header><!-- End Header -->
+
+
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex flex-column justify-content-center py-0 px-0 pt-lg-0 order-2 order-lg-1">
+        <img src="{{ asset('public/frontend/images/5.jpg')}}" class="img-fluid animated" alt="">
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2 px-0 py-0 hero-img">
+        <img src="{{ asset('public/frontend/images/5.jpg')}}" class="img-fluid animated" alt="">
+      </div>
+       </div>
+  </div>
+
+
+
+  <h1 class="text-center pt-5 pb-5">タイトルテキスト</h1>
+    <section id="ctaarea">
+     <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-5">
+           <img src="{{ asset('public/frontend/images/6.jpg')}}" class="img-fluid" alt="">          
+        </div>
+        
+        <div class="good col-7 col-md-5">
+          <img src="{{ asset('public/frontend/images/7.jpg')}}" class="img-fluid" alt=""> 
+        </div>
+        </div>
+        
+    </div>
+</section>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+<div class="container">
+<div class="row">
+<div class="col-lg-6 d-flex flex-column justify-content-center">
+  <h6 class="text-center pt-5 pb-5">説明テキスト①　説明テキスト①　説明テキスト①　説明テキスト①　説明テキスト①　説明テキスト①　説明テキスト①　</h6>
+</div>
+<div class="col-lg-6">
+ <h6 class="text-center pt-5 pb-5">説明テキスト②　説明テキスト②　説明テキスト②　説明テキスト②　説明テキスト②　説明テキスト②　説明テキスト②　</h6>
+</div>
+ </div>
 </div>
 
+
+
+<h1 class="text-center pt-5 pb-5">222タイトルテキスト</h1>
+<div class="container pb-5">
+<div class="row">
+<img src="{{ asset('public/frontend/images/8.jpg')}}" class="img-fluid animated" alt="">
+</div>
+</div>
+<section id="ctaarea2">
+<div class="container">
+<div class="row">
+<div class="col-md-6 offset-5">
+   <br><br><br><br><br><br><br><br><img src="{{ asset('public/frontend/images/6.jpg')}}" class="img-fluid" alt="">          
+</div>
+
+<div class="good2 col-7 col-md-5">
+  <img src="{{ asset('public/frontend/images/2.jpg')}}" class="img-fluid" alt=""> 
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-6">
+    <h3>ああああああああああああああああ</h3>
+    <h4><strong>¥4,980 yen + tax5ml</strong></h4>
+    <h5>あああああああああああああああああああああああああああああああああああああああああ</h5>
+@foreach ($featured as $row)
+<button id="{{ $row->id }}" class="btn btn-lg btn-warning rounded-pill" data-toggle="modal" data-target="#cartmodal" onclick="productview(this.id)">購入する</button>
+@endforeach
+
+</div>
+</div>
+</div> 
+</div>
+</section><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <!-- ======= Point Section ======= -->
+        <section id="services" class="services section-bg">
+            <div class="container" data-aos="fade-up">
+      
+              <div class="section-title">
+                <h1 class="text-center pb-5">Services</h1>
+                
+              </div>
+      
+              <div class="row">
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="icon-box">
+                    <img src="{{ asset('public/frontend/images/21.jpg')}}" class="img-fluid" alt="Responsive image">
+      
+                    <h4>①タイトル</h4>
+                    <p>説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル</p>
+                  </div>
+                </div>
+      
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="icon-box">
+                    <img src="{{ asset('public/frontend/images/22.jpg')}}" class="img-fluid" alt="Responsive image">
+                    <h4>②タイトル</h4>
+                    <p>説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル</p>
+                  </div>
+                </div>
+      
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+                  <div class="icon-box">
+                    <img src="{{ asset('public/frontend/images/23.jpg')}}" class="img-fluid" alt="Responsive image">
+                    <h4>③タイトル</h4>
+                    <p>説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル</p>
+                  </div>
+                </div>
+      
+                <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+                  <div class="icon-box">
+                    <img src="{{ asset('public/frontend/images/24.jpg')}}" class="img-fluid" alt="Responsive image">
+                    <h4>④タイトル</h4>
+                    <p>説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル説明文サンプル</p>
+                  </div>
+                </div>
+      
+              </div>
+      
+            </div>
+          </section><!-- End Point Section -->
+
+
+          <!-- ======= INFORMATION Section ======= -->
+
+
+  
+    <div class="jumbotron">
+        <h1 class="display-4">INFORMATION</h1>
+        <p class="text-right">View　View</p>
+        <hr class="my-4">
+        <p>テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト</p>
+        <h4><strong>公開しました</strong></h4>
+      </div><!-- End INFORMATION Section -->
+
+
+
+      <!-- ======= Instagram Section ======= -->
+    <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+  
+          <div class="section-title">
+            
+            <h4>INSTAGRAM</h4>
+            <p class="text-right">View　View</p>
+  
+            
+          </div>
+  
+          <div class="row">
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+              <div class="card">
+              <img src="{{ asset('public/frontend/images/24.jpg')}}" class="img-fluid" alt="Responsive image">
+              <div class="card-body">
+               <a href="#" class="insta_btn2">
+                <i class="fab fa-instagram"></i> <span>Follow Me</span>
+              </a>
+  
+              </div>
+            </div>
+              <!-- <div class="icon-box">
+                <img src="img/21.jpg" class="img-fluid" alt="Responsive image">
+  
+                
+              </div> -->
+            </div>
+  
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+              <div class="card">
+              <img src="{{ asset('public/frontend/images/23.jpg')}}" class="img-fluid" alt="Responsive image">
+              <div class="card-body">
+               <a href="#" class="insta_btn2">
+                <i class="fab fa-instagram"></i> <span>Follow Me</span>
+              </a>
+            </div>
+            </div>
+            </div>
+  
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+              <div class="card">
+              <img src="{{ asset('public/frontend/images/22.jpg')}}" class="img-fluid" alt="Responsive image">
+              <div class="card-body">
+               <a href="#" class="insta_btn2">
+                <i class="fab fa-instagram"></i> <span>Follow Me</span>
+              </a>
+            </div>
+            </div>
+            </div>
+  
+  
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+              <div class="card">
+              <img src="{{ asset('public/frontend/images/21.jpg')}}" class="img-fluid" alt="Responsive image">
+              <div class="card-body">
+               <a href="#" class="insta_btn2">
+                <i class="fab fa-instagram"></i> <span>Follow Me</span>
+              </a>
+            </div>
+            </div>
+            </div>
+  
+  
+          </div>
+  
+        </div>
+      </section><!-- End Instagram Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
 <!-- Deals of the week -->
 
 <div class="deals_featured">
@@ -80,85 +288,7 @@ $hot = DB::table('products')
                 
                 <!-- Deals -->
 
-                <div class="deals">
-                    <div class="deals_title">Deals of the Week</div>
-                    <div class="deals_slider_container">
-                        
-                        <!-- Deals Slider -->
-                        <div class="owl-carousel owl-theme deals_slider">
-                            @foreach ($hot as $ht)
-                                
-                            
-                            <!-- Deals Item -->
-                            <div class="owl-item deals_item">
-                                <div class="deals_image"><img src="{{ asset( $ht->image_one)}}" alt=""></div>
-                                <div class="deals_content">
-                                    <div class="deals_info_line d-flex flex-row justify-content-start">
-                                        <div class="deals_item_category"><a href="#">{{$ht->brand_name}}</a></div>
-@if ($ht->discount_price == NULL)
-    
-@else
-<div class="deals_item_price_a ml-auto">${{ $ht->selling_price}}</div>
-
-    
-@endif
-
-    </div>
-    <div class="deals_info_line d-flex flex-row justify-content-start">
-        <div class="deals_item_name">{{$ht->product_name}}</div>
-
-        @if ($ht->discount_price == NULL)
-        <div class="deals_item_price ml-auto">${{ $ht->selling_price}}</div>
-        @else
-        <div class="deals_item_price ml-auto">${{ $ht->discount_price}}</div>
-
-       
-        @endif
-                                    </div>
-                                    <div class="available">
-                                        <div class="available_line d-flex flex-row justify-content-start">
-                                            <div class="available_title">Available: <span>{{$ht->product_quantity}}</span></div>
-                                            <div class="sold_title ml-auto">Already sold: <span>28</span></div>
-                                        </div>
-                                        <div class="available_bar"><span style="width:17%"></span></div>
-                                    </div>
-                                    <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
-                                        <div class="deals_timer_title_container">
-                                            <div class="deals_timer_title">Hurry Up</div>
-                                            <div class="deals_timer_subtitle">Offer ends in:</div>
-                                        </div>
-                                        <div class="deals_timer_content ml-auto">
-                                            <div class="deals_timer_box clearfix" data-target-time="">
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_hr" class="deals_timer_hr"></div>
-                                                    <span>hours</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_min" class="deals_timer_min"></div>
-                                                    <span>mins</span>
-                                                </div>
-                                                <div class="deals_timer_unit">
-                                                    <div id="deals_timer1_sec" class="deals_timer_sec"></div>
-                                                    <span>secs</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            <!-- Deals Item -->
-
-
-                        </div>
-
-                    </div>
-
-                    <div class="deals_slider_nav_container">
-                        <div class="deals_slider_prev deals_slider_nav"><i class="fas fa-chevron-left ml-auto"></i></div>
-                        <div class="deals_slider_next deals_slider_nav"><i class="fas fa-chevron-right ml-auto"></i></div>
-                    </div>
-                </div>
+                
                 
                 <!-- Featured -->
                 <div class="featured">
@@ -209,6 +339,7 @@ $hot = DB::table('products')
                       
                 <button id="{{ $row->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" onclick="productview(this.id)">Add to Cart</button>
                            </div>
+                            
                        </div>
 
 
@@ -241,8 +372,10 @@ $hot = DB::table('products')
 
                 
             </ul>
+            
         </div>
     </div>
+    <button id="{{ $row->id }}" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#cartmodal" onclick="productview(this.id)">ああああああ</button>
     @endforeach
 
 </div>
@@ -422,7 +555,7 @@ $mid = DB::table('products')
                                                         <input type="radio" name="product_color" style="background:#000000">
                                                         <input type="radio" name="product_color" style="background:#999999">
                                                     </div>
-                                                    <button class="product_cart_button">Add to Cart</button>
+                                                    <button id="{{ $row->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal" onclick="productview(this.id)">Add to Cart</button>
                                                 </div>
                                             </div>
                                 
@@ -823,22 +956,7 @@ $mid = DB::table('products')
                             </div>
 
                             <!-- Best Sellers Item -->
-                            <div class="bestsellers_item">
-                                <div class="bestsellers_item_container d-flex flex-row align-items-center justify-content-start">
-                                    <div class="bestsellers_image"><img src="{{ asset('public/frontend/images/best_6.png')}}" alt=""></div>
-                                    <div class="bestsellers_content">
-                                        <div class="bestsellers_category"><a href="#">Headphones</a></div>
-                                        <div class="bestsellers_name"><a href="product.html">Xiaomi Redmi Note 4</a></div>
-                                        <div class="rating_r rating_r_4 bestsellers_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="bestsellers_price discount">$225<span>$300</span></div>
-                                    </div>
-                                </div>
-                                <div class="bestsellers_fav active"><i class="fas fa-heart"></i></div>
-                                <ul class="bestsellers_marks">
-                                    <li class="bestsellers_mark bestsellers_discount">-25%</li>
-                                    <li class="bestsellers_mark bestsellers_new">new</li>
-                                </ul>
-                            </div>
+                         
 
                         </div>
                     </div>
@@ -1404,7 +1522,7 @@ $mid = DB::table('products')
                                               @else
                                         <div class="product_price discount">${{ $row->discount_price }}<span>${{ $row->selling_price }}</span></div>
                                               @endif 
-
+                                              <button id="{{ $row->id }}" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#cartmodal" onclick="productview(this.id)">Add to Cart</button>              
                                 <a href="" class="btn btn-danger btn-sm">Add to Cart</a>
 
 
@@ -1728,7 +1846,7 @@ $mid = DB::table('products')
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLavel">Product Quick View</h5>
+          <h5 class="modal-title" id="exampleModalLavel">BAG</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -1737,7 +1855,7 @@ $mid = DB::table('products')
   
         <div class="modal-body">
          <div class="row">
-          <div class="col-md-4">
+          <div class="col">
               <div class="card">
                   <img src="" id="pimage">
                   <div class="card-body">
@@ -1752,28 +1870,28 @@ $mid = DB::table('products')
 
 
 
-          <div class="col-md-4">
+          {{-- <div class="col-md-4">
             <ul class="list-group">
   <li class="list-group-item">Product Code:<span id="pcode"></span> </li>
   <li class="list-group-item">Category: <span id="pcat"></span></li>
   <li class="list-group-item">Subcategory: <span id="psub"></span></li>
   <li class="list-group-item">Brand:<span id="pbrand"></span> </li>
   <li class="list-group-item">Stock: <span class="badge" style="background: green;color: white;" > Available</span> </li>
-</ul>            </div>
+</ul>            </div> --}}
               
 
 
 
 
 
-            <div class="col-md-4">
+            <div class="col">
 
                 <form method="post" action="{{ route('insert.into.cart')}}">
                     @csrf
 
                 <input type="hidden" name="product_id" id="product_id">
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="exampleInputcolor">Color</label>
                     <select name="color" class="form-control" id="color">
                         
@@ -1785,13 +1903,13 @@ $mid = DB::table('products')
                     <select name="size" class="form-control" id="size">
                         
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="form-group">
-                    <label for="exampleInputcolor">Quantity</label>
+                    <label for="exampleInputcolor">数量</label>
                     <input type="number" class="form-control" name="qty" value="1">
                 </div>
-                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                <button type="submit" class="btn btn-lg btn-warning rounded-pill">Add to Cart</button>
             </form>
 
             </div>

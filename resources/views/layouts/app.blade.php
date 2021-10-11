@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <title>OneTech</title>
 <meta charset="utf-8">
@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/plugins/slick-1.8.0/slick.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/main_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/responsive.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/customstyle.css') }}"> --}}
 
 <!-- chart -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
@@ -27,10 +29,106 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 
+<style>
+    #ctaarea {
+      position:relative
+    }
+
+
+    .good {
+      position: absolute;
+      top: 90%;
+      left: 19%;
+      transform: translate(-50%, -50%);
+
+    }
+
+    #ctaarea2 {
+      position:relative
+    }
+
+
+    .good2 {
+      position: absolute;
+      top: 30%;
+      left: 19%;
+      transform: translate(-50%, -50%);
+
+    }
+
+    .insta_btn2{/*ボタンの下地*/
+  color: #FFF;/*文字・アイコン色*/
+  border-radius: 7px;/*角丸に*/
+  position: relative;
+  display: inline-block;
+  height: 50px;/*高さ*/
+  width: 190px;/*幅*/
+  text-align: center;/*中身を中央寄せ*/
+  font-size: 25px;/*文字のサイズ*/
+  line-height: 50px;/*高さと合わせる*/
+  background: -webkit-linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+  background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;/*グラデーション①*/
+  overflow: hidden;/*はみ出た部分を隠す*/
+  text-decoration:none;/*下線は消す*/
+}
+
+.insta_btn2:before{/*グラデーション②*/
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;/*全体を覆う*/
+  height: 100%;/*全体を覆う*/
+  background: -webkit-linear-gradient(15deg, #ffdb2c, rgb(249, 118, 76) 25%, rgba(255, 77, 64, 0) 50%) no-repeat;
+  background: linear-gradient(15deg, #ffdb2c, rgb(249, 118, 76) 25%, rgba(255, 77, 64, 0) 50%) no-repeat;
+}
+
+.insta_btn2 .fa-instagram{/*アイコン*/
+  font-size: 35px;/*アイコンサイズ*/
+  position: relative;
+  top: 4px;/*アイコン位置の微調整*/
+}
+
+.insta_btn2 span {/*テキスト*/
+  display:inline-block;
+  position: relative;
+  transition: .5s
+}
+
+.insta_btn2:hover span{/*ホバーで一周回転*/
+  -webkit-transform: rotateX(360deg);
+  -ms-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+}
+  </style>
+
 
 </head>
 
 <body>
+ {{-- <!-- ======= Header ======= -->
+ <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center bg-dark">
+
+      <h1 class="logo mr-auto pt-5"><a href="{{ url('/')}}">サイトNAME</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav class="nav-menu d-none d-lg-block">
+        
+      </nav><!-- .nav-menu -->
+
+      <div class="cart_icon">
+        <a href="{{ route('show.cart') }}">
+          <img src="{{ asset('public/frontend/images/cart.png')}}" alt="">
+        <div class="cart_count"><span>{{ Cart::count() }}</span></div>
+    </div>
+    <div class="cart_content">
+        <div class="cart_text">Cart</div>
+        <div class="cart_price">￥{{ Cart::subtotal() }}</div>
+    </div></a>
+    </div>
+  </header><!-- End Header --> --}}
 
 
 <div class="super_container">
@@ -41,88 +139,7 @@
 
         <!-- Top Bar -->
 
-        <div class="top_bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col d-flex flex-row">
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend/images/phone.png')}}" alt=""></div>{{$setting->phone_one}}</div>
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('public/frontend/images/mail.png')}}" alt=""></div><a href="mailto:fastsales@gmail.com">{{$setting->email}}</a></div>
-                        <div class="top_bar_content ml-auto">
 
-                            @guest
-                            @else    
-                            
-
-                            <div class="top_bar_menu">
-                                <ul class="standard_dropdown top_bar_dropdown">
-                                    
-                                    <li>
-                                    <a href="" data-toggle="modal" data-target="#exampleModal">My Order Traking</a>
-                                    </li>
-                                   
-                                </ul>
-                            </div>
-                            @endguest
-
-
-
-
-
-
-
-
-
-                            <div class="top_bar_menu">
-                                <ul class="standard_dropdown top_bar_dropdown">
-
-                                    @php
-                                        $language = Session()->get('lang');
-                                    @endphp
-
-
-
-                                    <li>
-                                        @if(Session()->get('lang') == 'hindi' )
-                                        <a href="{{ route('language.english') }}">English<i class="fas fa-chevron-down"></i></a>
-                                       @else
-                                        <a href="{{ route('language.hindi') }}">Hindi<i class="fas fa-chevron-down"></i></a>
-                                       @endif        
-                                        
-                                        
-                                        
-                                    </li>
-                                   
-                                </ul>
-                            </div>
-                            <div class="top_bar_user">
-
-                                @guest
-                                <div><a href="{{ route('login')}}"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg')}}" alt=""></div>Register/Login</a></div>
-
-                                @else
-                                <ul class="standard_dropdown top_bar_dropdown">
-                                    <li>
-                                    <a href="{{ route('home')}}"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg')}}" alt=""></div>Profile<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li><a href="{{ route('user.wishlist')}}">Wishlist</a></li>
-                                    <li><a href="{{ route('user.checkout')}}">Chechout</a></li>
-                                    <li><a href="#">Others</a></li>
-                                </ul>
-                            </li>
-                            
-                        </ul>
-                                @endguest
-
-                                
-                                
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>      
-        </div>
 
         <!-- Header Main -->
 
@@ -131,11 +148,7 @@
                 <div class="row">
 
                     <!-- Logo -->
-                    <div class="col-lg-2 col-sm-3 col-3 order-1">
-                        <div class="logo_container">
-                            <div class="logo"><a href="{{ url('/')}}"><img src="{{ asset('public/frontend/images/logo.png')}}" alt=""></a></div>
-                        </div>
-                    </div>
+                    
 
 @php
     $category = DB::table('categories')->get();
@@ -143,32 +156,7 @@
 
 
                     <!-- Search -->
-                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
-                        <div class="header_search">
-                            <div class="header_search_content">
-                                <div class="header_search_form_container">
-                                    <form method="post" action="{{ route('product.search')}}" class="header_search_form clearfix">
-                                        @csrf
-                                        <input type="search" required="required" class="header_search_input" placeholder="Search for products..." name="search">
-                                        <div class="custom_dropdown">
-                                            <div class="custom_dropdown_list">
-                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
-                                                <i class="fas fa-chevron-down"></i>
-                                                <ul class="custom_list clc">
-                                                    @foreach ($category as $row)
-                                                    <li><a class="clc" href="#">{{ $row->category_name}}</a></li>
-                                                    @endforeach
-                                                    
-       
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="{{ asset('public/frontend/images/search.png')}}" alt=""></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <!-- Wishlist -->
                     <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
@@ -194,18 +182,7 @@
                             </div>
                     @endguest
                             <!-- Cart -->
-                            <div class="cart">
-                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                    <div class="cart_icon">
-                                        <img src="{{ asset('public/frontend/images/cart.png')}}" alt="">
-                                        <div class="cart_count"><span>{{ Cart::count() }}</span></div>
-                                    </div>
-                                    <div class="cart_content">
-                                        <div class="cart_text"><a href="{{ route('show.cart')}}">Cart</a></div>
-                                        <div class="cart_price">${{ Cart::subtotal() }}</div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -252,47 +229,15 @@
                 </div>
 
                 <div class="col-lg-2 offset-lg-2">
-                    <div class="footer_column">
-                        <div class="footer_title">Find it Fast</div>
-                        <ul class="footer_list">
-                            <li><a href="#">Computers & Laptops</a></li>
-                            <li><a href="#">Cameras & Photos</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Smartphones & Tablets</a></li>
-                            <li><a href="#">TV & Audio</a></li>
-                        </ul>
-                        <div class="footer_subtitle">Gadgets</div>
-                        <ul class="footer_list">
-                            <li><a href="#">Car Electronics</a></li>
-                        </ul>
-                    </div>
+                    
                 </div>
 
                 <div class="col-lg-2">
-                    <div class="footer_column">
-                        <ul class="footer_list footer_list_2">
-                            <li><a href="#">Video Games & Consoles</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Cameras & Photos</a></li>
-                            <li><a href="#">Hardware</a></li>
-                            <li><a href="#">Computers & Laptops</a></li>
-                        </ul>
-                    </div>
+                    
                 </div>
 
                 <div class="col-lg-2">
-                    <div class="footer_column">
-                        <div class="footer_title">Customer Care</div>
-                        <ul class="footer_list">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Order Tracking</a></li>
-                            <li><a href="#">Wish List</a></li>
-                            <li><a href="#">Customer Services</a></li>
-                            <li><a href="#">Returns / Exchange</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Product Support</a></li>
-                        </ul>
-                    </div>
+                    
                 </div>
 
             </div>

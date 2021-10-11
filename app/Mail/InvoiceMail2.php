@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceMail extends Mailable
+class InvoiceMail2 extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,6 +28,6 @@ class InvoiceMail extends Mailable
     public function build()
     {
         $info = $this->data;
-        return $this->from('nikoniko9888@yahoo.co.jp')->view('mail.invoice',compact('info'))->subject('Product Buy Successfully');
+        return $this->from('nikoniko9888@yahoo.co.jp')->view('mail.invoice2',compact('info'))->subject('Product Buy Successfully');
     }
 }

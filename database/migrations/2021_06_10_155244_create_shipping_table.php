@@ -19,8 +19,10 @@ class CreateShippingTable extends Migration
             $table->string('ship_name');
             $table->string('ship_email');
             $table->string('ship_phone');
+            $table->string('zipcode');
             $table->string('ship_address');
             $table->string('ship_city');
+            $table->string('ship_building');
             $table->timestamps();
         });
     }

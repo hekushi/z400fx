@@ -9,6 +9,7 @@ use Cart;
 use Session;
 use Mail;
 use App\Mail\InvoiceMail;
+use App\Mail\InvoiceMail2;
 
 class PaymentController extends Controller
 {
@@ -17,8 +18,10 @@ class PaymentController extends Controller
         $data['name'] = $request->name;
         $data['phone'] = $request->phone;
         $data['email'] = $request->email;
+        $data['zip'] = $request->zip;
         $data['address'] = $request->address;
         $data['city'] = $request->city;
+        $data['building'] = $request->building;
         $data['payment'] = $request->payment;
         //dd($data);
 
@@ -41,7 +44,7 @@ class PaymentController extends Controller
         
 
        
-        $email = Auth::user()->email;
+        $email = $request->ship_email;
         $total = $request->total;
          
         
@@ -62,7 +65,7 @@ class PaymentController extends Controller
        ]);
        
        $data = array();
-       $data['user_id'] = Auth::id();
+       $data['user_id'] = Auth::id() === 1;
        $data['payment_id'] = $charge->payment_method;
        $data['paying_amount'] = $charge->amount;
        $data['blnc_transection'] = $charge->balance_transaction;
@@ -79,7 +82,7 @@ class PaymentController extends Controller
            $data['subtotal'] = Cart::Subtotal();
        }
        $data['status'] = 0;
-       $data['date'] = date('d-m-y');
+       $data['date'] = date('y-m-d');
        $data['month'] = date('F');
        $data['year'] = date('Y');
        $order_id = DB::table('orders')->insertGetId($data);
@@ -94,8 +97,10 @@ class PaymentController extends Controller
        $shipping['ship_name'] = $request->ship_name;
        $shipping['ship_phone'] = $request->ship_phone;
        $shipping['ship_email'] = $request->ship_email;
+       $shipping['zipcode'] = $request->zipcode;
        $shipping['ship_address'] = $request->ship_address;
        $shipping['ship_city'] = $request->ship_city;
+       $shipping['ship_building'] = $request->ship_building;
        DB::table('shipping')->insert($shipping);
 
        ///insert order details table
@@ -135,11 +140,12 @@ class PaymentController extends Controller
 
 
        public function Oncash(Request $request){
-       
+        $email = $request->ship_email;
+        $total = $request->total;
         
        
        $data = array();
-       $data['user_id'] = Auth::id();
+       $data['user_id'] = Auth::id() === 1;
        $data['shipping'] = $request->shipping;
        $data['vat'] = $request->vat;
        $data['total'] = $request->total;
@@ -152,7 +158,7 @@ class PaymentController extends Controller
            $data['subtotal'] = Cart::Subtotal();
        }
        $data['status'] = 0;
-       $data['date'] = date('d-m-y');
+       $data['date'] = date('y-m-d');
        $data['month'] = date('F');
        $data['year'] = date('Y');
        $order_id = DB::table('orders')->insertGetId($data);
@@ -167,9 +173,15 @@ class PaymentController extends Controller
        $shipping['ship_name'] = $request->ship_name;
        $shipping['ship_phone'] = $request->ship_phone;
        $shipping['ship_email'] = $request->ship_email;
+       $shipping['zipcode'] = $request->zipcode;
        $shipping['ship_address'] = $request->ship_address;
        $shipping['ship_city'] = $request->ship_city;
+       $shipping['ship_building'] = $request->ship_building;
        DB::table('shipping')->insert($shipping);
+
+
+       // Mail send to user for Invoice
+       Mail::to($email)->send(new invoiceMail2($data));
 
        ///insert order details table
 

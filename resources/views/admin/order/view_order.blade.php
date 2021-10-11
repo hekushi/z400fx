@@ -64,6 +64,7 @@
 
          </div>     
     </div>
+    
 
 
 
@@ -73,34 +74,44 @@
          <div class="card-body">
          	<table class="table">
          		<tr>
-         	<th> Name: </th>
+         	<th> お名前: </th>
          	<th> {{ $shipping->ship_name }} </th>		
          		</tr>
 
          		<tr>
-         	<th> Phone: </th>
+         	<th> 電話番号: </th>
          	<th> {{ $shipping->ship_phone }} </th>		
          		</tr>
+
+             <tr>
+              <th> 〒: </th>
+              <th> {{ $shipping->zipcode }} </th>		
+                </tr>
 
 
 
          		<tr>
-         	<th> Email: </th>
+         	<th> メールアドレス: </th>
          	<th>{{ $shipping->ship_email }} </th>		
          		</tr>
 
 
 
          		<tr>
-         	<th> Address: </th>
+         	<th> 配送先: </th>
          	<th> {{ $shipping->ship_address }} </th>		
          		</tr>
 
 
          		<tr>
-         	<th> City : </th>
+         	<th> 市区町村 : </th>
          	<th> {{ $shipping->ship_city }} </th>		
          		</tr>
+
+             <tr>
+              <th> 建物名・部屋番号 : </th>
+              <th> {{ $shipping->ship_building }} </th>		
+                </tr>
 
          		<tr>
          	<th> Status: </th>
