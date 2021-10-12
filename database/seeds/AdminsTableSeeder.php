@@ -14,8 +14,8 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
+            'id' => 1,
             'name' => 'admin',
-            'phone' => '09012345678',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password123'),
             'category' => '1',
@@ -27,8 +27,10 @@ class AdminsTableSeeder extends Seeder
             'report' => '1',
             'role' => '1',
             'return' => '1',
+            'contact' => '1',            
             'comment' => '1',
             'setting' => '1',
+            'stock' => '1',
             'type' => '1',
             'created_at' => '2021/01/01 11:11:11'
         ]);
